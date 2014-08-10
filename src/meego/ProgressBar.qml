@@ -39,7 +39,7 @@
 ****************************************************************************/
 
 import QtQuick 2.1
-import "."
+import com.nokia.meego 1.2
 import Qt.labs.components 1.1
 
 import "Utils.js" as Utils

@@ -39,7 +39,7 @@
 ****************************************************************************/
 
 import QtQuick 2.1
-import "."
+import com.nokia.meego 1.2
 
 import "ButtonGroup.js" as Private
 import "UIConstants.js" as UI

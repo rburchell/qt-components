@@ -115,6 +115,7 @@ public:
 
     void registerTypes(const char *uri) {
         Q_ASSERT(uri == QLatin1String("com.nokia.meego") || uri == QLatin1String("Qt.labs.components.native"));
+        qDebug() << "Registering ScrollDecoratorSizerCPP to " << uri;
         qmlRegisterUncreatableType<MDateTimeHelper>(uri, 1, 0, "DateTime", "");
         qmlRegisterUncreatableType<MPageStatus>(uri, 1, 0, "PageStatus", "");
         qmlRegisterUncreatableType<MDialogStatus>(uri, 1, 0, "DialogStatus", "");
@@ -131,7 +132,6 @@ public:
         qmlRegisterType<MDeclarativeIMAttributeExtension>(uri, 1, 0, "SipAttributes");
         qmlRegisterType<MDeclarativeIMObserver>(uri, 1, 0, "InputMethodObserver");
 
-        qDebug() << "Registering ScrollDecoratorSizerCPP to " << uri;
         qmlRegisterType<MScrollDecoratorSizer>(uri, 1, 0, "ScrollDecoratorSizerCPP");
         qmlRegisterType<MInverseMouseArea>(uri, 1, 0, "InverseMouseArea");
 

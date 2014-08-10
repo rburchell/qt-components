@@ -42,7 +42,7 @@
 // pages that can be switched between to implement a tabbed user interface.
 
 import QtQuick 2.1
-import "."
+import com.nokia.meego 1.2
 
 Item {
     

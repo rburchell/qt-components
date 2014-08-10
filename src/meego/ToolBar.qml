@@ -41,7 +41,7 @@
 // The ToolBar is a container for toolbar items such as ToolItem or ToolButton.
 
 import QtQuick 2.1
-import "."
+import com.nokia.meego 1.2
 
 Item {
     id: root

@@ -41,7 +41,7 @@
 // ToolItem is a component that is used to add actions to toolbars.
 
 import QtQuick 2.1
-import "."
+import com.nokia.meego 1.2
 
 ToolIcon {
     Component.onCompleted: {

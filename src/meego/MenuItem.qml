@@ -41,7 +41,7 @@
 // MenuItem is a component that is used in menus.
 
 import QtQuick 2.1
-import "."
+import com.nokia.meego 1.2
 import "UIConstants.js" as UI
 
 Item {

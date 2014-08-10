@@ -41,7 +41,7 @@
 // ToolButton is a push-button style button intended for use with toolbars.
 
 import QtQuick 2.1
-import "."
+import com.nokia.meego 1.2
 
 Button {
     id: root
