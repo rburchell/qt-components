@@ -12,7 +12,7 @@ The project is divided into:
 
 and also (for the time being) two QML modules for component sets implemented using those components
 
-- com.meego: components from MeeGo Touch UI library,
+- com.nokia.meego: components from MeeGo Touch UI library,
 
 The lib will install in QTDIR/lib, while the modules will go to QTDIR/imports.
 

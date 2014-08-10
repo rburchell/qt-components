@@ -75,12 +75,7 @@ class MeeGoPlugin : public QDeclarativeExtensionPlugin
 
 public:
     void initializeEngine(QDeclarativeEngine *engine, const char *uri) {
-        Q_ASSERT(uri == QLatin1String("com.meego") || uri == QLatin1String("com.nokia.meego") || uri == QLatin1String("Qt.labs.components.native"));
-
-        if(uri == QLatin1String("com.meego")) {
-            qWarning() << "'import com.meego' is DEPRECATED and may cause 'Error: Cannot assign QObject* to PageStack_QMLTYPE_42*', missing icons, widgets and other problems;"
-                          "use 'import com.nokia.meego' instead";
-        }
+        Q_ASSERT(uri == QLatin1String("com.nokia.meego") || uri == QLatin1String("Qt.labs.components.native"));
 
         QDeclarativeExtensionPlugin::initializeEngine(engine, uri);
 
@@ -119,7 +114,7 @@ public:
     }
 
     void registerTypes(const char *uri) {
-        Q_ASSERT(uri == QLatin1String("com.meego") || uri == QLatin1String("com.nokia.meego") || uri == QLatin1String("Qt.labs.components.native"));
+        Q_ASSERT(uri == QLatin1String("com.nokia.meego") || uri == QLatin1String("Qt.labs.components.native"));
         qmlRegisterUncreatableType<MDateTimeHelper>(uri, SINCE_VERSION(1, 0), "DateTime", "");
         qmlRegisterUncreatableType<MPageStatus>(uri, SINCE_VERSION(1, 0), "PageStatus", "");
         qmlRegisterUncreatableType<MDialogStatus>(uri, SINCE_VERSION(1, 0), "DialogStatus", "");

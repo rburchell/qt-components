@@ -1,6 +1,6 @@
 include (../../qt-components.pri)
 
-TARGETPATH = com/nokia/meego com/meego
+TARGETPATH = com/nokia/meego
 TEMPLATE = lib
 TARGET = $$qtLibraryTarget(meegoplugin)
 INCLUDEPATH += $$PWD
