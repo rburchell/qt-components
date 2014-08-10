@@ -67,7 +67,7 @@
     
     \code
     //main.qml
-    import QtQuick 1.1
+    import QtQuick 2.1
     import com.nokia.meego 1.1
 
     PageStackWindow {
@@ -155,7 +155,7 @@
     
     \code
     //MainPage.qml
-    import QtQuick 1.1
+    import QtQuick 2.1
     import com.nokia.meego 1.1
 
     Page {
@@ -257,7 +257,7 @@
     
     \code
     //DialogsPage.qml
-    import QtQuick 1.1
+    import QtQuick 2.1
     import com.nokia.meego 1.1
 
     Page {
@@ -431,7 +431,7 @@
     
     \code
     //SimpleExamplesPage.qml
-    import QtQuick 1.1
+    import QtQuick 2.1
     import com.nokia.meego 1.1
 
     Page {

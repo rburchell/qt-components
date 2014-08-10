@@ -38,7 +38,7 @@
 **
 ****************************************************************************/
 
-import QtQuick 1.1
+import QtQuick 2.1
 import com.nokia.meego 1.0
 import "Tumbler.js" as Engine
 import "constants.js" as C

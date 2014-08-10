@@ -38,7 +38,7 @@
 **
 ****************************************************************************/
 
-import QtQuick 1.1
+import QtQuick 2.1
 
 Item {
     // relative (0..1) position of top and bottom

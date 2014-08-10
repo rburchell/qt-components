@@ -159,7 +159,7 @@ static const char qt_emptyAttributeName[] = "";
     shader code.
 
     \qml
-import QtQuick 1.0
+import QtQuick 2.1
 import Qt.labs.shaders 1.0
 
 Rectangle {

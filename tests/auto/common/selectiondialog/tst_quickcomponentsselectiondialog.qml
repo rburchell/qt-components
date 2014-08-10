@@ -38,7 +38,7 @@
 **
 ****************************************************************************/
 
-import QtQuick 1.1
+import QtQuick 2.1
 import Qt.labs.components.native 1.0
 
 SelectionDialog {

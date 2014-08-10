@@ -56,7 +56,7 @@
 
     \section1 QML Right-to-left Support
     
-    QML provides the right-to-left support in QtQuick 1.1. For more information,
+    QML provides the right-to-left support in QtQuick 2.1. For more information,
     see \l http://doc.qt.nokia.com/4.7-snapshot/qml-righttoleft.html
 
     \section1 Component-specific Notes

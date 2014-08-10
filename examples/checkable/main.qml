@@ -38,7 +38,7 @@
 **
 ****************************************************************************/
 
-import QtQuick 1.1
+import QtQuick 2.1
 import Qt.labs.components 1.1
 
 // See MyButton.qml for details on how use Checkable and CheckableGroup to

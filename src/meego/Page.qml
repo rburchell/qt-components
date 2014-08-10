@@ -41,7 +41,7 @@
 // The Page item is intended for use as a root item in QML items that make
 // up pages to use with the PageStack.
 
-import QtQuick 1.1
+import QtQuick 2.1
 import "." 1.0
 import "UIConstants.js" as UI
 

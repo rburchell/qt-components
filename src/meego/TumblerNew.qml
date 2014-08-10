@@ -38,7 +38,7 @@
 **
 ****************************************************************************/
 
-import QtQuick 1.1
+import QtQuick 2.1
 
 Tumbler {
     Component.onCompleted: console.log("DEPRECATION WARNING: TumblerNew is being deprecated, please renmae to Tumbler instead. This component will be removed on April 25th, 2011")

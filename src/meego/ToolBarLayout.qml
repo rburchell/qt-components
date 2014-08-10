@@ -41,7 +41,7 @@
 // ToolBarLayout is a container for items on a toolbar that automatically
 // implements an appropriate layout for its children.
 
-import QtQuick 1.1
+import QtQuick 2.1
 import "." 1.0
 import "UIConstants.js" as UI
 import "ToolBarLayout.js" as Layout

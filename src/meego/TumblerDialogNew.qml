@@ -38,7 +38,7 @@
 **
 ****************************************************************************/
 
-import QtQuick 1.1
+import QtQuick 2.1
 
 TumblerDialog {
     Component.onCompleted: console.log("DEPRECATION WARNING: TumblerDialogNew is being deprecated, please renmae to TumblerDialog instead. This component will be removed on April 25th, 2011")

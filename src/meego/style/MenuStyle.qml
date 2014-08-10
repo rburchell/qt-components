@@ -37,7 +37,7 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-import QtQuick 1.1
+import QtQuick 2.1
 
 Style {
     id: root

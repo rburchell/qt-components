@@ -41,7 +41,7 @@
 // The TabGroup item defines a set of tabs consisting of page stacks or
 // pages that can be switched between to implement a tabbed user interface.
 
-import QtQuick 1.1
+import QtQuick 2.1
 import "." 1.0
 
 Item {
