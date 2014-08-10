@@ -10,7 +10,7 @@ force-local-theme: DEFINES+=FORCE_LOCAL_THEME
 
 win32|mac:!wince*:!win32-msvc:!macx-xcode:CONFIG += debug_and_release build_all
 CONFIG += qt plugin copy_native install_native
-QT += declarative network opengl
+QT += network opengl
 !win32:!macx:!qnx {
     QT += dbus
     DEFINES += HAVE_DBUS
@@ -20,8 +20,8 @@ QT += declarative network opengl
     CONFIG += link_pkgconfig
 }
 
-packagesExist(mlite) {
-    PKGCONFIG += mlite
+packagesExist(mlite5) {
+    PKGCONFIG += mlite5
     DEFINES+=HAVE_MLITE
 } else {
     warning("mlite is not available; theme detection won't work")
@@ -75,11 +75,18 @@ contains(MOBILITY_CONFIG, systeminfo) {
     DEFINES += HAVE_SYSTEMINFO
 }
 
+contains(QT_CONFIG, dbus): DEFINES += HAVE_DBUS
+
+#contains(QT_CONFIG, opengles2) {
+#    CONFIG += egl 
+#    PKGCONFIG += bcm_host 
+#}
+#contains(QT_CONFIG, xlib): DEFINES += HAVE_XLIB
+
 SOURCES += \
     plugin.cpp \
-    mdeclarativestatusbar.cpp \
+    mdatetimehelper.cpp \
     mdeclarativescreen.cpp \
-    msnapshot.cpp \
     minversemousearea.cpp \
     mdeclarativeinputcontext.cpp \
     mdeclarativeimageprovider.cpp \
@@ -105,10 +112,9 @@ SOURCES += \
     shadereffectitem/scenegraph/qsggeometry.cpp
 
 HEADERS += \
-    mdeclarativestatusbar.h \
+    mdatetimehelper.h \
     mdeclarativescreen.h \
     mdialogstatus.h \
-    msnapshot.h \
     mpagestatus.h \
     minversemousearea.h \
     mdeclarativeinputcontext.h \
@@ -140,6 +146,31 @@ HEADERS += \
 
 QML_FILES = \
         qmldir \
+        constants.js\
+        CountBubble.qml \
+        DatePickerDialog.qml \
+        InfoBanner.qml \
+        ListDelegate.qml \
+        ListButton.qml \
+        style/ListButtonStyle.qml \
+        MoreIndicator.qml \
+        NetPromoterScore.qml \
+        PageIndicator.qml \
+        RatingIndicator.qml \
+        SystemBanner.qml \
+        TimePickerDialog.qml \
+        Tumbler.qml \
+        TumblerNew.qml \
+        TumblerDialogNew.qml \
+        Tumbler.js \
+        TumblerColumn.qml \
+        TumblerIndexHelper.js \
+        TumblerTemplate.qml \
+        TumblerButton.qml \
+        style/TumblerButtonStyle.qml \
+        TumblerDialog.qml \
+        style/NegativeButtonStyle.qml \
+        style/PositiveButtonStyle.qml \
         ApplicationWindow.qml \
         style/ApplicationWindowStyle.qml \
         BusyIndicator.qml \
@@ -242,6 +273,38 @@ QML_FILES = \
         MultiSelectionDialog.js \
         Magnifier.qml \
         Magnifier.js
+
+equals(QT_MAJOR_VERSION, 5) {
+    # Tweaks sources and headers for Qt5
+    QT += quick
+
+    QML_FILES += \
+        MaskedItem.qml \
+        Snapshot.qml
+
+    SOURCES -= \
+        mdeclarativemaskeditem.cpp \
+        mdeclarativeview.cpp \
+        mx11wrapper.cpp \
+        shadereffectitem/shadereffect.cpp \
+        shadereffectitem/shadereffectitem.cpp \
+        shadereffectitem/shadereffectsource.cpp \
+        shadereffectitem/shadereffectbuffer.cpp \
+        shadereffectitem/scenegraph/qsggeometry.cpp
+
+
+    HEADERS -= \
+        mdeclarativemaskeditem.h \
+        mdeclarativeview.h \
+        shadereffectitem/glfunctions.h \
+        shadereffectitem/shadereffect.h \
+        shadereffectitem/shadereffectitem.h \
+        shadereffectitem/shadereffectsource.h \
+        shadereffectitem/shadereffectbuffer.h \
+        shadereffectitem/scenegraph/qsggeometry.h
+} else {
+    QT += declarative
+}
 
 include(../../qml.pri)
 

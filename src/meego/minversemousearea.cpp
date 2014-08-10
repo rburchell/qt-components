@@ -77,7 +77,7 @@ void MInverseMouseArea::setEnabled(bool enabled)
     }
 }
 
-QVariant MInverseMouseArea::itemChange(GraphicsItemChange change, const QVariant &value)
+void MInverseMouseArea::itemChange(ItemChange change, const ItemChangeData &data)
 {
     switch (change) {
     case QGraphicsItem::ItemSceneChange: {
@@ -88,9 +88,7 @@ QVariant MInverseMouseArea::itemChange(GraphicsItemChange change, const QVariant
 
         m_pressed = false;
 
-        if (value.canConvert<QGraphicsScene *>()) {
-            QGraphicsScene *newScene = value.value<QGraphicsScene *>();
-
+        if (QQuickWindow *newScene = data.window) {
             if (newScene)
                 newScene->installEventFilter(this);
         }
@@ -105,20 +103,13 @@ QVariant MInverseMouseArea::itemChange(GraphicsItemChange change, const QVariant
         break;
     }
 
-    return QDeclarativeItem::itemChange(change, value);
+    QQuickItem::itemChange(change, data);
 }
 
 bool MInverseMouseArea::isClickedOnSoftwareInputPanel(QGraphicsSceneMouseEvent *event) const
 {
-    QGraphicsItem * item = scene()->itemAt(event->scenePos());
-    while(item != NULL) {
-        QDeclarativeItem * declItem = dynamic_cast<QDeclarativeItem *>(item);
-        if(declItem != NULL && declItem->objectName() == "softwareInputPanel")
-            return true;
-
-        item = item->parentItem();
-    }
-
+    Q_UNUSED(event);
+    // FIXME: How do we solve this with Qt5?
     return false;
 }
 
@@ -133,7 +124,8 @@ bool MInverseMouseArea::eventFilter(QObject *obj, QEvent *ev)
         QGraphicsSceneMouseEvent *me = static_cast<QGraphicsSceneMouseEvent *>(ev);
         QPointF mappedPos = mapToRootItem(me->scenePos());
 
-        m_pressed = !contains(mapFromScene(me->scenePos())) && !isClickedOnSoftwareInputPanel(me);
+        m_pressed = !isUnderMouse() && !isClickedOnSoftwareInputPanel(me);
+
         if (m_pressed)
             emit pressedOutside(mappedPos.x(), mappedPos.y());
         break;

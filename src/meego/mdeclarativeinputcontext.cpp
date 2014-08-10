@@ -38,9 +38,8 @@
 **
 ****************************************************************************/
 
-#include <QApplication>
+#include <QGuiApplication>
 #include <QMouseEvent>
-#include <QInputContext>
 #include <QInputMethodEvent>
 #include <QTimer>
 #include <QRect>
@@ -50,6 +49,9 @@
 #ifdef HAVE_MALIIT
 #include <maliit/inputmethod.h>
 #include <maliit/preeditinjectionevent.h>
+#else
+#include <QInputMethod>
+#include <QGuiApplication>
 #endif
 
 #include "mdeclarativeinputcontext.h"
@@ -60,6 +62,7 @@ public:
     MDeclarativeInputContextPrivate(MDeclarativeInputContext *qq);
     ~MDeclarativeInputContextPrivate();
 
+    void _q_updateKeyboardRectangle();
     void _q_sipChanged(const QRect &);
     void _q_checkMicroFocusHint();
 
@@ -76,8 +79,8 @@ public:
 
     QRectF microFocus;
     QVariant sipEvent;
-    QDeclarativeComponent *sipVkbComponent;
-    QDeclarativeItem *sipVkbTextField;
+    QQmlComponent *sipVkbComponent;
+    QQuickItem *sipVkbTextField;
 };
 
 MDeclarativeInputContextPrivate::MDeclarativeInputContextPrivate(MDeclarativeInputContext *qq)
@@ -95,11 +98,20 @@ MDeclarativeInputContextPrivate::MDeclarativeInputContextPrivate(MDeclarativeInp
     simulateSip = false;
     QObject::connect(Maliit::InputMethod::instance(), SIGNAL(areaChanged(const QRect &)),
                      q, SLOT(_q_sipChanged(const QRect &)));
+#else
+    simulateSip = false;
+    QObject::connect(qApp->inputMethod(), SIGNAL(keyboardRectangleChanged()),
+                     q, SLOT(_q_updateKeyboardRectangle()));
 #endif
 }
 
 MDeclarativeInputContextPrivate::~MDeclarativeInputContextPrivate()
 {
+}
+
+void MDeclarativeInputContextPrivate::_q_updateKeyboardRectangle()
+{
+    _q_sipChanged(qApp->inputMethod()->keyboardRectangle().toRect());
 }
 
 void MDeclarativeInputContextPrivate::_q_sipChanged(const QRect &rect)
@@ -121,22 +133,10 @@ void MDeclarativeInputContextPrivate::_q_sipChanged(const QRect &rect)
 
 void MDeclarativeInputContext::updateMicroFocus()
 {
-    if (QWidget *widget = QApplication::focusWidget()) {
-        QVariant v = widget->inputMethodQuery(Qt::ImMicroFocus);
-        if (!v.toRectF().isValid()) {
-            d->microFocus = QRectF(-1, -1, -1, -1);
-            return;
-        }
-        QRectF mf = v.toRectF();
-        if (mf != d->microFocus) {
-            d->microFocus = mf;
-        }
-    } else {
-        d->microFocus = QRectF(-1, -1, -1, -1);
-    }
+    d->microFocus = qApp->inputMethod()->cursorRectangle();
 }
 
-MDeclarativeInputContext::MDeclarativeInputContext(QDeclarativeItem *parent)
+MDeclarativeInputContext::MDeclarativeInputContext(QQuickItem *parent)
     : QObject(parent),
       d(new MDeclarativeInputContextPrivate(this))
 {
@@ -186,23 +186,17 @@ bool MDeclarativeInputContext::softwareInputPanelVisible() const
 
 QRect MDeclarativeInputContext::softwareInputPanelRect() const
 {
-#ifdef HAVE_MALIIT
     return d->sipRect;
-#else
-    return QRect(d->sipSimulationRect);
-#endif
 }
 
 void MDeclarativeInputContext::reset()
 {
-    QInputContext *ic = qApp->inputContext();
-    if (ic) ic->reset();
+    qApp->inputMethod()->reset();
 }
 
 void MDeclarativeInputContext::update()
 {
-    QInputContext *ic = qApp->inputContext();
-    if (ic) ic->update();
+    qApp->inputMethod()->update(Qt::ImQueryAll);
 }
 
 
@@ -217,12 +211,12 @@ void MDeclarativeInputContext::setSoftwareInputPanelEvent(const QVariant& event)
     emit softwareInputPanelEventChanged();
 }
 
-QDeclarativeComponent *MDeclarativeInputContext::customSoftwareInputPanelComponent() const
+QQmlComponent *MDeclarativeInputContext::customSoftwareInputPanelComponent() const
 {
     return d->sipVkbComponent;
 }
 
-void MDeclarativeInputContext::setCustomSoftwareInputPanelComponent(QDeclarativeComponent * component)
+void MDeclarativeInputContext::setCustomSoftwareInputPanelComponent(QQmlComponent * component)
 {
     if(d->sipVkbComponent != component) {
         d->sipVkbComponent = component;
@@ -243,20 +237,20 @@ void MDeclarativeInputContext::setCustomSoftwareInputPanelVisible(bool visible)
     }
 }
 
-QDeclarativeItem * MDeclarativeInputContext::customSoftwareInputPanelTextField() const
+QQuickItem *MDeclarativeInputContext::customSoftwareInputPanelTextField() const
 {
     return d->sipVkbTextField;
 }
 
-void MDeclarativeInputContext::setCustomSoftwareInputPanelTextField(QDeclarativeItem * item)
+void MDeclarativeInputContext::setCustomSoftwareInputPanelTextField(QQuickItem *item)
 {
     if(d->sipVkbTextField != item) {
-        d->sipVkbTextField = item;
+        d->sipVkbTextField = static_cast<QQuickItem*>(item);
         emit customSoftwareInputPanelTextFieldChanged();
     }
 }
 
-QDeclarativeItem * MDeclarativeInputContext::targetInputFor(QDeclarativeComponent *sipVkbComponent)
+QQuickItem *MDeclarativeInputContext::targetInputFor(QQmlComponent *sipVkbComponent)
 {
     if(sipVkbComponent)
         return customSoftwareInputPanelTextField();
@@ -282,19 +276,11 @@ void MDeclarativeInputContext::simulateSipClose()
 
 bool MDeclarativeInputContext::setPreeditText(const QString &newPreedit, int eventCursorPosition, int replacementStart, int replacementLength)
 {
-#ifdef HAVE_MALIIT
-    QInputContext *ic = qApp->inputContext();
-    if (ic) {
-        Maliit::PreeditInjectionEvent event(newPreedit, eventCursorPosition);
-        event.setReplacement(replacementStart, replacementLength);
-        return ic->filterEvent(&event);
-    }
-#else
+    // FIXME: How do we deal with this?
     Q_UNUSED(newPreedit)
     Q_UNUSED(eventCursorPosition)
     Q_UNUSED(replacementStart)
     Q_UNUSED(replacementLength)
-#endif
     return false;
 }
 

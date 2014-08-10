@@ -38,20 +38,16 @@
 **
 ****************************************************************************/
 
-#include <QtDeclarative>
-
-#include "fpsdeclarativeview.h"
+#include <QGuiApplication>
+#include <QQuickView>
+#include <QDir>
+#include <QVariant>
 
 int main(int argc, char **argv)
 {
-    QApplication app(argc, argv);
+    QGuiApplication app(argc, argv);
 
-    app.setProperty("NoMStyle", true);
-
-    QDir::setCurrent(app.applicationDirPath());
-
-    // QDeclarativeView window;
-    FPSDeclarativeView window;
+    QQuickView window;
     window.setSource(QUrl("qrc:/main.qml"));
 
 #ifdef __arm__

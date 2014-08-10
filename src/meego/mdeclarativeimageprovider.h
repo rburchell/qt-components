@@ -41,11 +41,12 @@
 #ifndef MDECLARATIVEIMAGEPROVIDER_H
 #define MDECLARATIVEIMAGEPROVIDER_H
 
-#include <qdeclarativeimageprovider.h>
+#include <qglobal.h>
+#include <qquickimageprovider.h>
 
 class MAbstractThemeDaemonClient;
 
-class MDeclarativeImageProvider : public QDeclarativeImageProvider
+class MDeclarativeImageProvider : public QQuickImageProvider
 {
 public:
     MDeclarativeImageProvider();

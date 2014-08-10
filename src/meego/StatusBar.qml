@@ -41,10 +41,11 @@
 import QtQuick 1.1
 import "." 1.0
 
-StatusBarInternal {
+Rectangle {
     id: statusBar
     anchors.top: parent.top
     width: parent.width
+    color: "black"
 
     property bool showStatusBar: true
     property bool __completed: false
@@ -55,7 +56,7 @@ StatusBarInternal {
     }
 
     Component.onCompleted: {
-        statusBar.orientation = screen.currentOrientation
+        //statusBar.orientation = screen.currentOrientation
         screen.updatePlatformStatusBarRect(statusBar)
         __completed = true;
     }

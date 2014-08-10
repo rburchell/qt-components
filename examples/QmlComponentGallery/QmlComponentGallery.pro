@@ -1,8 +1,10 @@
 TEMPLATE = app
-QT += declarative
+TARGET = QmlComponentGallery5
 target.path = $$INSTALL_PREFIX/bin
 
-include(../util/util.pri)
+include(../../src/compat/compat.pri)
+QT += quick
+TARGET = QmlComponentGallery5
 
 CONFIG -= app_bundle
 

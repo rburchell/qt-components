@@ -67,17 +67,17 @@ MDeclarativeMouseFilter::~MDeclarativeMouseFilter()
     }
 }
 
-QVariant MDeclarativeMouseFilter::itemChange(GraphicsItemChange c, const QVariant &v)
+void MDeclarativeMouseFilter::itemChange(ItemChange change, const ItemChangeData &)
 {
-    if(c==QGraphicsItem::ItemParentHasChanged || c== QGraphicsItem::ItemSceneHasChanged){
-        parentItem()->setHandlesChildEvents(true);
-        setKeepMouseGrab(true);
+    if (change == QQuickItem::ItemParentHasChanged || change == QQuickItem::ItemSceneChange) {
+        if (parentItem()) {
+            parentItem()->setFiltersChildMouseEvents(true);
+            setKeepMouseGrab(true);
+        }
     }
-    return v;
 }
 
-
-bool MDeclarativeMouseFilter::sceneEvent(QEvent *event)
+bool MDeclarativeMouseFilter::event(QEvent *event)
 {
     switch (event->type()) {
     case QEvent::GraphicsSceneMouseDoubleClick: {
@@ -170,7 +170,7 @@ bool MDeclarativeMouseFilter::sceneEvent(QEvent *event)
             emit finished();
             return true;            
         }
-        bool ret = QDeclarativeItem::sceneEvent(event);
+        bool ret = QDeclarativeItem::event(event);
         emit finished();
         return ret;
     }
@@ -187,7 +187,7 @@ bool MDeclarativeMouseFilter::sceneEvent(QEvent *event)
         break;
     }
 
-    return QDeclarativeItem::sceneEvent(event);
+    return QDeclarativeItem::event(event);
 }
 
 void MDeclarativeMouseFilter::timerEvent(QTimerEvent *ev)

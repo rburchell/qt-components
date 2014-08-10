@@ -125,7 +125,7 @@ public:
 #endif
     }
 
-    Q_INVOKABLE void registerInputElement(QDeclarativeItem *element) const {
+    Q_INVOKABLE void registerInputElement(QQuickItem *element) const {
 #ifdef HAVE_MALIIT
         if (element)
             element->setProperty("meego-inputmethod-attribute-extension-id", extension.id());

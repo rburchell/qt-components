@@ -42,7 +42,8 @@
 #define QGLOBALENUMS_H
 
 #include <QtCore/qobject.h>
-#include <QtDeclarative/qdeclarative.h>
+#include <QtQml/qqml.h>
+
 #include <kernel/common.h>
 
 class Q_COMPONENTS_EXPORT QGlobals : public QObject

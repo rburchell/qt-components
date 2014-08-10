@@ -45,12 +45,17 @@
 #include <QDesktopWidget>
 #include <QPointer>
 #include <QVector3D>
+#include <QQuickItem>
 
 #define MEEGOTOUCH_DOUBLETAP_INTERVAL 325
 
 class QDeclarativeItem;
 class MDeclarativeScreenPrivate;
 class MWindowState;
+
+#if defined(HAVE_XLIB)
+typedef struct _XDisplay Display;
+#endif
 
 class MDeclarativeScreen : public QObject
 {
@@ -133,11 +138,13 @@ public:
 
     Q_PROPERTY(bool isDisplayLandscape READ isDisplayLandscape NOTIFY physicalDisplayChanged FINAL)
 
+    Q_PROPERTY(int frameBufferRotation READ frameBufferRotation CONSTANT FINAL)
+
 public:
     static MDeclarativeScreen* instance();
     virtual ~MDeclarativeScreen();
 
-    Q_INVOKABLE void updatePlatformStatusBarRect(QDeclarativeItem * statusBar);
+    Q_INVOKABLE void updatePlatformStatusBarRect(QQuickItem * statusBar);
 
     Orientation currentOrientation() const;
 
@@ -167,12 +174,17 @@ public:
     bool isPortrait() const;
 
     bool isDisplayLandscape() const;
+    int frameBufferRotation() const;
 
     int dpi() const;
     DisplayCategory displayCategory() const;
     Density density() const;
 
     MWindowState * windowState() const;
+
+#if defined(HAVE_XLIB)
+    Display* display(QDeclarativeItem* item = 0) const;
+#endif
 
     Orientations platformPhysicalDisplayOrientation() const;
 

@@ -41,10 +41,8 @@
 #include <QtDeclarative>
 #include <QApplication>
 
-#include "mdeclarativestatusbar.h"
 #include "mdeclarativescreen.h"
 #include "mdeclarativeinputcontext.h"
-#include "msnapshot.h"
 #include "mpagestatus.h"
 #include "mdialogstatus.h"
 #include "mpageorientation.h"
@@ -61,19 +59,19 @@
 #include "mdeclarativeimobserver.h"
 #include "mdeclarativeview.h"
 #include "mtoolbarvisibility.h"
-#include <QDeclarativePropertyMap>
+#include "mdatetimehelper.h"
+
+#include <QQmlPropertyMap>
 #include <QFont>
 
 #include "kernel/common.h"
-
-#include "shadereffectitem/shadereffectitem.h"
-#include "shadereffectitem/shadereffectsource.h"
 
 #include "i18n/mlocalewrapper.h"
 
 class MeeGoPlugin : public QDeclarativeExtensionPlugin
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA(IID "com.nokia.meego")
 
 public:
     void initializeEngine(QDeclarativeEngine *engine, const char *uri) {
@@ -88,6 +86,7 @@ public:
 
         // If plugin was initialized once, do not initialize it again
         if(!engine->imageProvider(QLatin1String("theme"))) {
+            engine->rootContext()->setContextProperty("dateTime", new MDateTimeHelper(engine->rootContext()));
             engine->addImageProvider(QLatin1String("theme"), new MDeclarativeImageProvider);
 
             engine->rootContext()->setContextProperty("screen", MDeclarativeScreen::instance());
@@ -105,10 +104,6 @@ public:
             engine->rootContext()->setContextProperty("textTranslator", new MTextTranslator);
             qmlRegisterUncreatableType<MTextTranslator>(uri, SINCE_VERSION(1, 0), "TextTranslator", "");
 
-            engine->rootContext()->setContextProperty("declarativeView", new MDeclarativeView());
-            qmlRegisterUncreatableType<MDeclarativeView>(uri, SINCE_VERSION(1, 0), "DeclarativeView", "");
-
-
             // Disable cursor blinking + make double tapping work the way it is done in lmt.
             QApplication *app = qobject_cast<QApplication*>(QApplication::instance());
             if (app) {
@@ -125,9 +120,7 @@ public:
 
     void registerTypes(const char *uri) {
         Q_ASSERT(uri == QLatin1String("com.meego") || uri == QLatin1String("com.nokia.meego") || uri == QLatin1String("Qt.labs.components.native"));
-        qmlRegisterType<MDeclarativeStatusBar>(uri, SINCE_VERSION(1, 0), "StatusBarInternal");
-        qmlRegisterType<MSnapshot>(uri, SINCE_VERSION(1, 0), "Snapshot");
-
+        qmlRegisterUncreatableType<MDateTimeHelper>(uri, SINCE_VERSION(1, 0), "DateTime", "");
         qmlRegisterUncreatableType<MPageStatus>(uri, SINCE_VERSION(1, 0), "PageStatus", "");
         qmlRegisterUncreatableType<MDialogStatus>(uri, SINCE_VERSION(1, 0), "DialogStatus", "");
         qmlRegisterUncreatableType<MWindowState>(uri, SINCE_VERSION(1, 0), "WindowState","");
@@ -137,7 +130,6 @@ public:
 
         // Custom primitives
         qmlRegisterType<MDeclarativeImplicitSizeItem>(uri, SINCE_VERSION(1, 0), "ImplicitSizeItem");
-        qmlRegisterType<MDeclarativeMaskedItem>(uri, SINCE_VERSION(1, 0), "MaskedItem");
         qmlRegisterType<MInverseMouseArea>(uri, SINCE_VERSION(1, 0), "InverseMouseArea");
         qmlRegisterType<MDeclarativeMouseFilter>(uri, SINCE_VERSION(1, 0), "MouseFilter");
         qmlRegisterType<MDeclarativeMouseEvent>(uri, SINCE_VERSION(1, 0), "MMouseEvent");
@@ -145,19 +137,14 @@ public:
         qmlRegisterType<MDeclarativeIMObserver>(uri, SINCE_VERSION(1, 0), "InputMethodObserver");
 
         qmlRegisterType<MScrollDecoratorSizer>(uri, SINCE_VERSION(1, 0), "ScrollDecoratorSizerCPP");
-
-        // shader effect item (to be removed when fully supported in QML)
-        qmlRegisterType<ShaderEffectItem>(uri, SINCE_VERSION(1, 0), "ShaderEffectItem");
-        qmlRegisterType<ShaderEffectSource>(uri, SINCE_VERSION(1, 0), "ShaderEffectSource");
-
         qmlRegisterType<MInverseMouseArea>(uri, SINCE_VERSION(1, 0), "InverseMouseArea");
 
     }
 
     QDeclarativePropertyMap *uiConstants(MLocaleWrapper *locale = 0) {
 
-        QString defaultFontFamily      = QLatin1String("Nokia Pure Text");
-        QString defaultFontFamilyLight = QLatin1String("Nokia Pure Text Light");
+        QString defaultFontFamily      = QLatin1String("Open Sans");
+        QString defaultFontFamilyLight = QLatin1String("Open Sans");
 
         // use arial when language is set to farsi
         if (locale && locale->language() == QLatin1String("fa")) {
@@ -233,4 +220,3 @@ public:
 
 #include "plugin.moc"
 
-Q_EXPORT_PLUGIN2(meegoplugin, MeeGoPlugin);

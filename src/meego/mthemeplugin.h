@@ -42,7 +42,7 @@
 #define MTHEMEPLUGIN_H
 
 #include <qglobal.h>
-#include <qdeclarative.h>
+#include <qqml.h>
 
 class MThemePlugin : public QObject
 {

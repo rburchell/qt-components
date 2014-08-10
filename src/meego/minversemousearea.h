@@ -59,7 +59,7 @@ public:
 
 protected:
     bool eventFilter(QObject *obj, QEvent *ev);
-    QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+    void itemChange(ItemChange change, const ItemChangeData &data);
 
 private:
     bool isClickedOnSoftwareInputPanel(QGraphicsSceneMouseEvent *event) const;

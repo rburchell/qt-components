@@ -100,8 +100,8 @@ signals:
 public slots:
 
 protected:
-    virtual bool sceneEvent(QEvent *event);
-    QVariant itemChange(GraphicsItemChange, const QVariant &);
+    virtual bool event(QEvent *event);
+    void itemChange(ItemChange, const ItemChangeData &);
     void timerEvent(QTimerEvent *);
     void clampMousePosition(QGraphicsSceneMouseEvent *me);
 
