@@ -39,7 +39,7 @@
 ****************************************************************************/
 
 import QtQuick 2.1
-import "." 1.0
+import "."
 import "Utils.js" as Utils
 import "UIConstants.js" as UI
 import "EditBubble.js" as Popup

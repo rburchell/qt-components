@@ -40,7 +40,7 @@
 
 import QtQuick 2.1
 import QtQuickTest 1.0
-import com.nokia.meego 1.1
+import com.nokia.meego 1.2
 
 TestCase {
     name: "TumblerButton"

@@ -41,7 +41,7 @@
 // The ToolBar is a container for toolbar items such as ToolItem or ToolButton.
 
 import QtQuick 2.1
-import "." 1.0
+import "."
 
 Item {
     id: root

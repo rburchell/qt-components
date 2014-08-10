@@ -41,7 +41,7 @@
 // ToolItem is a component that is used to add actions to toolbars.
 
 import QtQuick 2.1
-import "." 1.0
+import "."
 
 Item {
     id: root

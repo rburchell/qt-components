@@ -42,7 +42,7 @@
 // pages that can be switched between to implement a tabbed user interface.
 
 import QtQuick 2.1
-import "." 1.0
+import "."
 
 Item {
     

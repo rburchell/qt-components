@@ -39,7 +39,7 @@
 ****************************************************************************/
 
 import QtQuick 2.1
-import com.nokia.meego 1.0
+import com.nokia.meego 1.2
 import Qt.labs.components 1.1 as QtComponents
 
 /*

@@ -39,7 +39,7 @@
 ****************************************************************************/
 
 import QtQuick 2.1
-import "." 1.0
+import "."
 
 import "EditBubble.js" as Popup
 import "SelectionHandles.js" as SelectionHandles

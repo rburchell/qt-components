@@ -39,8 +39,8 @@
 ****************************************************************************/
 
 import QtQuick 2.1
-import "." 1.0
-//import com.nokia.meego 1.0
+import "."
+//import com.nokia.meego 1.2
 
 /*
    Class: InfoBanner

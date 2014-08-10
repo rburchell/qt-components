@@ -41,7 +41,7 @@
 // MenuItem is a component that is used in menus.
 
 import QtQuick 2.1
-import "." 1.0
+import "."
 import "UIConstants.js" as UI
 
 Item {

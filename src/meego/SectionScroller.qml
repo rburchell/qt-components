@@ -38,7 +38,7 @@
 ****************************************************************************/
 
 import QtQuick 2.1
-import "." 1.0
+import "."
 import "SectionScroller.js" as Sections
 
 Item {

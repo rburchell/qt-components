@@ -40,8 +40,8 @@
 
 import QtQuick 2.1
 import QtQuickTest 1.0
-import com.nokia.meego 1.0
-import com.nokia.meego 1.1
+import com.nokia.meego 1.2
+import com.nokia.meego 1.2
 
 Item {
     width: 600

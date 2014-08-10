@@ -85,19 +85,19 @@ public:
             engine->addImageProvider(QLatin1String("theme"), new MDeclarativeImageProvider);
 
             engine->rootContext()->setContextProperty("screen", MDeclarativeScreen::instance());
-            qmlRegisterUncreatableType<MDeclarativeScreen>(uri, SINCE_VERSION(1, 0), "Screen", "");
+            qmlRegisterUncreatableType<MDeclarativeScreen>(uri, 1, 0, "Screen", "");
 
             engine->rootContext()->setContextProperty("platformWindow", MWindowState::instance());
-            qmlRegisterUncreatableType<MWindowState>(uri, SINCE_VERSION(1, 0), "WindowState", "");
+            qmlRegisterUncreatableType<MWindowState>(uri, 1, 0, "WindowState", "");
 
             engine->rootContext()->setContextProperty("theme", new MThemePlugin);
-            qmlRegisterUncreatableType<MThemePlugin>(uri, SINCE_VERSION(1, 0), "Theme", "");
+            qmlRegisterUncreatableType<MThemePlugin>(uri, 1, 0, "Theme", "");
 
             engine->rootContext()->setContextProperty("inputContext", new MDeclarativeInputContext);
-            qmlRegisterUncreatableType<MDeclarativeInputContext>(uri, SINCE_VERSION(1, 0), "InputContext", "");
+            qmlRegisterUncreatableType<MDeclarativeInputContext>(uri, 1, 0, "InputContext", "");
 
             engine->rootContext()->setContextProperty("textTranslator", new MTextTranslator);
-            qmlRegisterUncreatableType<MTextTranslator>(uri, SINCE_VERSION(1, 0), "TextTranslator", "");
+            qmlRegisterUncreatableType<MTextTranslator>(uri, 1, 0, "TextTranslator", "");
 
             // Disable cursor blinking + make double tapping work the way it is done in lmt.
             QApplication *app = qobject_cast<QApplication*>(QApplication::instance());
@@ -115,24 +115,25 @@ public:
 
     void registerTypes(const char *uri) {
         Q_ASSERT(uri == QLatin1String("com.nokia.meego") || uri == QLatin1String("Qt.labs.components.native"));
-        qmlRegisterUncreatableType<MDateTimeHelper>(uri, SINCE_VERSION(1, 0), "DateTime", "");
-        qmlRegisterUncreatableType<MPageStatus>(uri, SINCE_VERSION(1, 0), "PageStatus", "");
-        qmlRegisterUncreatableType<MDialogStatus>(uri, SINCE_VERSION(1, 0), "DialogStatus", "");
-        qmlRegisterUncreatableType<MWindowState>(uri, SINCE_VERSION(1, 0), "WindowState","");
-        qmlRegisterUncreatableType<MPageOrientation>(uri, SINCE_VERSION(1, 0), "PageOrientation", "");
-        qmlRegisterUncreatableType<MToolBarVisibility>(uri, SINCE_VERSION(1, 0), "ToolBarVisibility", "");
-        qmlRegisterUncreatableType<MTextTranslator>(uri, SINCE_VERSION(1, 0), "TextTranslator", "");
+        qmlRegisterUncreatableType<MDateTimeHelper>(uri, 1, 0, "DateTime", "");
+        qmlRegisterUncreatableType<MPageStatus>(uri, 1, 0, "PageStatus", "");
+        qmlRegisterUncreatableType<MDialogStatus>(uri, 1, 0, "DialogStatus", "");
+        qmlRegisterUncreatableType<MWindowState>(uri, 1, 0, "WindowState","");
+        qmlRegisterUncreatableType<MPageOrientation>(uri, 1, 0, "PageOrientation", "");
+        qmlRegisterUncreatableType<MToolBarVisibility>(uri, 1, 0, "ToolBarVisibility", "");
+        qmlRegisterUncreatableType<MTextTranslator>(uri, 1, 0, "TextTranslator", "");
 
         // Custom primitives
-        qmlRegisterType<MDeclarativeImplicitSizeItem>(uri, SINCE_VERSION(1, 0), "ImplicitSizeItem");
-        qmlRegisterType<MInverseMouseArea>(uri, SINCE_VERSION(1, 0), "InverseMouseArea");
-        qmlRegisterType<MDeclarativeMouseFilter>(uri, SINCE_VERSION(1, 0), "MouseFilter");
-        qmlRegisterType<MDeclarativeMouseEvent>(uri, SINCE_VERSION(1, 0), "MMouseEvent");
-        qmlRegisterType<MDeclarativeIMAttributeExtension>(uri, SINCE_VERSION(1, 0), "SipAttributes");
-        qmlRegisterType<MDeclarativeIMObserver>(uri, SINCE_VERSION(1, 0), "InputMethodObserver");
+        qmlRegisterType<MDeclarativeImplicitSizeItem>(uri, 1, 0, "ImplicitSizeItem");
+        qmlRegisterType<MInverseMouseArea>(uri, 1, 0, "InverseMouseArea");
+        qmlRegisterType<MDeclarativeMouseFilter>(uri, 1, 0, "MouseFilter");
+        qmlRegisterType<MDeclarativeMouseEvent>(uri, 1, 0, "MMouseEvent");
+        qmlRegisterType<MDeclarativeIMAttributeExtension>(uri, 1, 0, "SipAttributes");
+        qmlRegisterType<MDeclarativeIMObserver>(uri, 1, 0, "InputMethodObserver");
 
-        qmlRegisterType<MScrollDecoratorSizer>(uri, SINCE_VERSION(1, 0), "ScrollDecoratorSizerCPP");
-        qmlRegisterType<MInverseMouseArea>(uri, SINCE_VERSION(1, 0), "InverseMouseArea");
+        qDebug() << "Registering ScrollDecoratorSizerCPP to " << uri;
+        qmlRegisterType<MScrollDecoratorSizer>(uri, 1, 0, "ScrollDecoratorSizerCPP");
+        qmlRegisterType<MInverseMouseArea>(uri, 1, 0, "InverseMouseArea");
 
     }
 

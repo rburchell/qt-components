@@ -41,7 +41,7 @@
 // ToolButton is a push-button style button intended for use with toolbars.
 
 import QtQuick 2.1
-import "." 1.0
+import "."
 
 Button {
     id: toolButton

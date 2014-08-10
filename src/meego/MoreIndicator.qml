@@ -39,7 +39,7 @@
 ****************************************************************************/
 
 import QtQuick 2.1
-import com.nokia.meego 1.0  // needed for the custom image loader
+import com.nokia.meego 1.2  // needed for the custom image loader
 
 /*
    Class: MoreIndicator

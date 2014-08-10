@@ -39,7 +39,7 @@
 ****************************************************************************/
 
 import QtQuick 2.1
-import "." 1.0
+import "."
 import Qt.labs.components 1.1
 
 import "Utils.js" as Utils

@@ -42,7 +42,7 @@
 // implements an appropriate layout for its children.
 
 import QtQuick 2.1
-import "." 1.0
+import "."
 import "UIConstants.js" as UI
 import "ToolBarLayout.js" as Layout
 

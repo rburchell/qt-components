@@ -46,8 +46,4 @@
 # define Q_COMPONENTS_EXPORT Q_DECL_IMPORT
 #endif
 
-#ifndef SINCE_VERSION
-#   define SINCE_VERSION(major, minor) 2, 0
-#endif
-
 #endif // COMMON_H
