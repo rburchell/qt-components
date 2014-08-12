@@ -48,7 +48,7 @@ import com.nokia.meego 1.2
    A page indicator is a component that shows the number of availabe pages as well as the page the user is
    currently on.  The user can also specify the display type to select the normal/inverted visual.
 */
-ImplicitSizeItem {
+Item {
     id: root
 
     /*

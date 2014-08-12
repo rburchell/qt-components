@@ -48,7 +48,7 @@ import "constants.js" as UI
    shouldn't exceed 3.
 */
 
-ImplicitSizeItem {
+Item {
     id: root
 
     /*

@@ -44,7 +44,7 @@ import Qt.labs.components 1.1
 
 import "Utils.js" as Utils
 
-ImplicitSizeItem {
+Item {
     id: container
 
     property alias minimumValue: progressModel.minimumValue

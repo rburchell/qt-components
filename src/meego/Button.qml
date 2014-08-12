@@ -42,7 +42,7 @@ import QtQuick 2.1
 import com.nokia.meego 1.2
 import "UIConstants.js" as UI
 
-ImplicitSizeItem {
+Item {
     id: button
 
     // Common public API

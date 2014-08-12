@@ -90,7 +90,6 @@ SOURCES += \
     minversemousearea.cpp \
     mdeclarativeinputcontext.cpp \
     mdeclarativeimageprovider.cpp \
-    mdeclarativeimplicitsizeitem.cpp \
     mdeclarativemaskeditem.cpp \
     mscrolldecoratorsizer.cpp \
     mtexttranslator.cpp \
@@ -119,7 +118,6 @@ HEADERS += \
     minversemousearea.h \
     mdeclarativeinputcontext.h \
     mdeclarativeimageprovider.h \
-    mdeclarativeimplicitsizeitem.h \
     mdeclarativemaskeditem.h \
     mscrolldecoratorsizer.h \
     mtexttranslator.h \

@@ -47,7 +47,7 @@ import com.nokia.meego 1.2
    notification banners for example.
 */
 
-ImplicitSizeItem {
+Item {
     id: root
 
     /*

@@ -48,7 +48,6 @@
 #include "mpageorientation.h"
 #include "minversemousearea.h"
 #include "mdeclarativeimageprovider.h"
-#include "mdeclarativeimplicitsizeitem.h"
 #include "mdeclarativemaskeditem.h"
 #include "mthemeplugin.h"
 #include "mtexttranslator.h"
@@ -125,7 +124,6 @@ public:
         qmlRegisterUncreatableType<MTextTranslator>(uri, 1, 0, "TextTranslator", "");
 
         // Custom primitives
-        qmlRegisterType<MDeclarativeImplicitSizeItem>(uri, 1, 0, "ImplicitSizeItem");
         qmlRegisterType<MInverseMouseArea>(uri, 1, 0, "InverseMouseArea");
         qmlRegisterType<MDeclarativeMouseFilter>(uri, 1, 0, "MouseFilter");
         qmlRegisterType<MDeclarativeMouseEvent>(uri, 1, 0, "MMouseEvent");

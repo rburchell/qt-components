@@ -50,7 +50,7 @@ import Qt.labs.components 1.1 as QtComponents
    to the user's specification.  The user can also specify the display type to select the positive/negative
    visual.  Optionally, the user can also specify a count value that will be displayed next to the images.
 */
-ImplicitSizeItem {
+Item {
     id: root
 
     /*

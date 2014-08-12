@@ -47,7 +47,7 @@ import "Utils.js" as Utils
 // ### Display Entered / Exited! Pause animation when not "on display".
 // ### LayoutDirection
 
-ImplicitSizeItem {
+Item {
     id: root
 
     property bool running: false

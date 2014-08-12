@@ -43,7 +43,7 @@ import com.nokia.meego 1.2
 
 import "UIConstants.js" as UI
 
-ImplicitSizeItem {
+Item {
     id: checkbox
 
     property Style platformStyle: CheckBoxStyle{}

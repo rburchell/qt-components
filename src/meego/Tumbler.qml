@@ -47,7 +47,7 @@ import "constants.js" as C
    Class: Tumbler
    A tumbler.
 */
-ImplicitSizeItem {
+Item {
     id: root
 
     /*
